@@ -5216,6 +5216,7 @@ static int __devexit iris_remove(struct platform_device *pdev)
 		FMDERR(":radio is null");
 		return -EINVAL;
 	}
+
 	video_unregister_device(radio->videodev);
 
 	for (i = 0; i < IRIS_BUF_MAX; i++)

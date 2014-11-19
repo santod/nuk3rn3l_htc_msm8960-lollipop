@@ -32,6 +32,10 @@ module_param_named(keycaps, keycaps, charp, 0);
 
 static struct gpio_event_direct_entry m7_keypad_map[] = {
 	{
+		.gpio = PWR_KEY_MSMz,
+		.code = KEY_POWER,
+	},
+	{
 		.gpio = VOL_DOWNz,
 		.code = KEY_VOLUMEDOWN,
 	},

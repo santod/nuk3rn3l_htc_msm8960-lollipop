@@ -23,6 +23,7 @@
 #include <linux/wakelock.h>
 
 #ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_3K
+#if 0
 static uint8_t power_key_state;
 static spinlock_t power_key_state_lock;
 
@@ -60,6 +61,7 @@ static void power_key_state_disable_work_func(struct work_struct *dummy)
 }
 static DECLARE_DELAYED_WORK(power_key_state_disable_work, power_key_state_disable_work_func);
 
+
 static void handle_power_key_state(unsigned int code, int value)
 {
 	int ret = 0;
@@ -92,6 +94,7 @@ static void handle_power_key_state(unsigned int code, int value)
 		}
 	}
 }
+#endif
 #endif /* CONFIG_TOUCHSCREEN_SYNAPTICS_3K */
 
 #ifdef CONFIG_HTC_WAKE_ON_VOL
@@ -248,11 +251,19 @@ static enum hrtimer_restart gpio_event_input_timer_func(struct hrtimer *timer)
 				"changed to %d\n", ds->info->type,
 				key_entry->code, i, key_entry->gpio, pressed);
 #ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_3K
+#if 0
 		handle_power_key_state(key_entry->code, pressed);
+#endif
+#endif
+#ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_3K
+		if (key_entry->code != KEY_POWER) { // don't handle KEY_POWER, fixup for m7
 #endif
 		input_event(ds->input_devs->dev[key_entry->dev], ds->info->type,
 			    key_entry->code, pressed);
 		sync_needed = true;
+#ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_3K
+		}
+#endif
 	}
 	if (sync_needed) {
 		for (i = 0; i < ds->input_devs->count; i++)
@@ -374,7 +385,9 @@ static int gpio_event_input_request_irqs(struct gpio_input_state *ds)
 		}
 	}
 #ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_3K
+#if 0
 	init_power_key_api();
+#endif
 #endif
 	return 0;
 

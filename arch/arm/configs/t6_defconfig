@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.4.82 Kernel Configuration
+# Linux/arm 3.4.103 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -746,8 +746,7 @@ CONFIG_NEON=y
 CONFIG_BINFMT_ELF=y
 CONFIG_ARCH_BINFMT_ELF_RANDOMIZE_PIE=y
 CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS=y
-CONFIG_HAVE_AOUT=y
-# CONFIG_BINFMT_AOUT is not set
+# CONFIG_HAVE_AOUT is not set
 # CONFIG_BINFMT_MISC is not set
 
 #
@@ -1862,8 +1861,6 @@ CONFIG_I2C_QUP=y
 CONFIG_SPI=y
 # CONFIG_SPI_DEBUG is not set
 CONFIG_SPI_MASTER=y
-CONFIG_FPR_SPI=y
-CONFIG_FPR_SPI_DMA_GSBI1=y
 
 #
 # SPI Master Controller Drivers
@@ -3178,6 +3175,20 @@ CONFIG_PRIMA_WLAN_LFR=y
 CONFIG_PRIMA_WLAN_OKC=y
 # CONFIG_PRIMA_WLAN_11AC_HIGH_TP is not set
 CONFIG_QCOM_VOWIFI_11R=y
+CONFIG_QCOM_TDLS=y
+
+#
+# Qualcomm Atheros Prima WLAN module
+#
+CONFIG_PRIMA_WLAN_3x=y
+
+#
+# Qualcomm Atheros Prima WLAN module
+#
+CONFIG_PRIMA_WLAN_3x=y
+# CONFIG_PRONTO_WLAN is not set
+# CONFIG_WLAN_FEATURE_11W is not set
+# CONFIG_CONFIG_ENABLE_LINUX_REG is not set
 
 #
 # Qualcomm Atheros Prima WLAN module

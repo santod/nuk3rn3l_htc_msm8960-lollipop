@@ -5492,8 +5492,20 @@ VOS_STATUS hdd_post_voss_start_config(hdd_context_t* pHddCtx)
    return VOS_STATUS_SUCCESS;
 }
 
-/* wake lock APIs for HDD */
-void hdd_prevent_suspend(void)
+   } while (0);
+
+}
+
+/**---------------------------------------------------------------------------
+
+  \brief hdd_is_5g_supported() - HDD function to know if hardware supports  5GHz
+
+  \param  - pHddCtx - Pointer to the hdd context
+
+  \return -  true if hardware supports 5GHz
+
+  --------------------------------------------------------------------------*/
+static boolean hdd_is_5g_supported(hdd_context_t * pHddCtx)
 {
 #ifdef WLAN_OPEN_SOURCE
     wake_lock(&wlan_wake_lock);
@@ -5502,7 +5514,24 @@ void hdd_prevent_suspend(void)
 #endif
 }
 
-void hdd_allow_suspend(void)
+
+/**---------------------------------------------------------------------------
+
+  \brief hdd_11d_scan_done - callback to be executed when 11d scan is
+                             completed to flush out the scan results
+
+  11d scan is done during driver load and is a passive scan on all
+  channels supported by the device, 11d scans may find some APs on
+  frequencies which are forbidden to be used in the regulatory domain
+  the device is operating in. If these APs are notified to the supplicant
+  it may try to connect to these APs, thus flush out all the scan results
+  which are present in SME after 11d scan is done.
+
+  \return -  eHalStatus
+
+  --------------------------------------------------------------------------*/
+static eHalStatus hdd_11d_scan_done(tHalHandle halHandle, void *pContext,
+                         tANI_U32 scanId, eCsrScanStatus status)
 {
 #ifdef WLAN_OPEN_SOURCE
     wake_unlock(&wlan_wake_lock);
