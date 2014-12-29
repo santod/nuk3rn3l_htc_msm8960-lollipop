@@ -2922,7 +2922,7 @@ static void synaptics_ts_finger_func(struct synaptics_ts_data *ts)
 							   last_touch_position_x = finger_data[i][0];
 							   last_touch_position_y = finger_data[i][1];
 							   if (!report_htc_logo_area(last_touch_position_x,last_touch_position_y)) {
-								if (scr_suspended == true) {
+								if (scr_suspended && in_phone_call == 1) {
 									finger_data[i][0] = -10;
 									finger_data[i][1] = -10; 
 								}

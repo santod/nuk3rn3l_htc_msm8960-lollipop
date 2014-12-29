@@ -191,6 +191,7 @@ enum {
 
 #ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE
 extern void sweep2wake_setdev(struct input_dev * input_device);
+extern int in_phone_call;
 #endif
 
 extern uint8_t touchscreen_is_on(void);
